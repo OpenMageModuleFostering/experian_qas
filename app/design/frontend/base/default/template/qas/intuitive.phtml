@@ -1,0 +1,38 @@
+<?php $suffix = $this->getSuffix(); ?>
+<?php $helper = Mage::helper('experian_qas'); ?>
+<?php if ($helper->isIntuitiveEnabled()): ?>
+
+    <div id="address_search_autocomplete" class="search_autocomplete"></div>
+    <script type="text/javascript">
+    //<![CDATA[
+    var QUERY_PARAM = '<?php echo Experian_Qas_Helper_Data::QUERY_PARAM ?>';
+    var QUERY_MONIKER = '<?php echo Experian_Qas_Helper_Data::QUERY_MONIKER ?>';
+    var QUERY_COUNTRY = '<?php echo Experian_Qas_Helper_Data::QUERY_COUNTRY ?>';
+    var NORMALIZE_URL = '<?php echo Mage::getUrl('qas/process/normalizeAddress')?>';
+    var INTUITIVE_URL = '<?php echo Mage::getUrl('qas/process/intuitiveEngine')?>';
+    //]]>
+    </script>
+    
+    <script type="text/javascript">
+    //<![CDATA[
+    Event.observe(window, 'load', function() {
+        var addressSearchForm_<?php echo $suffix ?> = new Varien.addressSearchForm(
+            '<?php echo $this->getFormName() ?>', 
+            '<?php echo $this->getStreet1() ?>', 
+            '',
+            '<?php echo $this->getCountry() ?>',
+            '<?php echo $this->getRegion() ?>',
+            '<?php echo $this->getCity() ?>',
+            '<?php echo $this->getZip() ?>',
+            '<?php echo $this->getStreet1() ?>',
+            '<?php echo $this->getStreet2() ?>'
+        );
+        addressSearchForm_<?php echo $suffix ?>.initAutocomplete(
+            INTUITIVE_URL, 
+            'address_search_autocomplete'
+        );
+    });
+    //]]>
+    </script>
+
+<?php endif; ?>

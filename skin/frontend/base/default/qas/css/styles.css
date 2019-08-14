@@ -1,0 +1,61 @@
+
+.interactionWindow {
+	background: none repeat scroll 0 0 #F3BF8F;
+    width: 600px;
+    border: 1px;
+    border-color: #000;
+    border-style: solid;
+    position:absolute;
+    top: 20%;
+    left: 30%;
+    z-index:981;
+    padding: 0 4px 4px 4px; 
+    text-align: left;
+        
+}
+.interactionWindow a{
+    background: url("../images/bkg_btn-close.gif") repeat-x scroll 0 50% transparent !important;
+    border: 1px solid #EA7601;
+    color: #FFFFFF;
+    cursor: pointer;
+    float: right;
+    font: 12px/17px Arial,Helvetica,sans-serif;
+    padding: 0 12px 0 7px;
+    text-decoration: none !important;
+}
+.message-popup-content {
+    background: none repeat scroll 0 0 #FDF4EB;
+    padding: 21px 21px 10px;
+}
+.interactionWindow a span {
+    background: url("../images/bkg_btn-close2.gif") no-repeat scroll 0 50% transparent;
+    float: left;
+    padding-left: 19px;
+}
+.interactionWindow h2{
+    color: #644F3B;
+    font: bold 12px/19px Arial,Helvetica,sans-serif;
+    margin: 0;
+    padding: 0 10px;
+}
+.interactionWindow-mask {
+   background-color: #EFEFEF;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 980;
+}
+
+#address_search_autocomplete { z-index:999; height:350px; overflow:auto;}
+#address_search_autocomplete ul { border:1px solid #5c7989; background-color:#f9f5f0; }
+#address_search_autocomplete li { text-align:left; border-bottom:1px solid #f4eee7; padding:2px 8px 1px 8px; cursor:pointer; }
+#address_search_autocomplete li .amount { float:right; font-weight:bold; }
+#address_search_autocomplete li.odd { background-color:#fffefb; }
+#address_search_autocomplete li.selected { background-color:#f7e8dd; }
+
+.validate-email-loader {position:absolute; margin:2px 2px 1px 4px;}

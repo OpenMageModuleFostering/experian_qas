@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package>
+    <name>Experian_Qas</name>
+    <version>1.3.0</version>
+    <stability>stable</stability>
+    <license uri="http://opensource.org/licenses/osl-3.0.php">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>QAS for Magento Community &amp; Enterprise</summary>
+    <description>Experian QAS is a leading provider of address data quality software and services. Their suite of&#xD;
+products is designed to capture, validate, clean, standardize and enrich addresses, names and&#xD;
+other important contact information.&#xD;
+&#xD;
+For this Magento extension, four services will be integrated. QAS Email Validate, QAS Intuitive&#xD;
+Search Engine, QAS Verification and QAS SingleLine.&#xD;
+</description>
+    <notes>- Change email validation service&#xD;
+- Fix bugs&#xD;
+- Add intuitive cache system</notes>
+    <authors><author><name>Experian</name><user>ExperianFrance</user><email>QAS-DL-ProfessionalServices-FRA@experian.com</email></author></authors>
+    <date>2014-04-30</date>
+    <time>12:47:20</time>
+    <contents><target name="magecommunity"><dir name="Experian"><dir name="Qas"><dir name="Block"><dir name="AddressField"><file name="Billing.php" hash="c9bf10a8a5518640eda3f0fa78ead2dd"/><file name="Shipping.php" hash="c19dbfe5f6ac2584bcb07268b61687e3"/></dir><file name="AddressField.php" hash="48057abbd5c661bbff392d44da57eec6"/><dir name="Adminhtml"><dir name="System"><dir name="Config"><dir name="Form"><file name="IntuitiveCountryFieldset.php" hash="b7458f47eb9d040cd3cdd36bf5bb8dd1"/></dir></dir></dir></dir><file name="Autocomplete.php" hash="152a5e3c52932e42bf4a421e593203ef"/><file name="Interaction.php" hash="e1889fe538cfba924739e196f3f4ef2d"/><file name="Verification.php" hash="e4e49505a6ca88d9263e7eb3fb59aee4"/></dir><dir name="Helper"><file name="Data.php" hash="7f4052948d7cdf72dd689f8346f9efa7"/></dir><dir name="Model"><file name="Observer.php" hash="4072c569da70074c8b1ba825e72beb72"/><file name="Qascall.php" hash="75f1c1cd7b9c296af8d3a106e5133773"/><dir name="System"><dir name="Config"><dir name="Source"><file name="Engine.php" hash="201d5ec887be2b7212c663f21c79e5e8"/><file name="SpecialEngine.php" hash="9aa41b162a3c2484807a0b2ab9ca865c"/></dir></dir></dir></dir><dir name="controllers"><file name="ProcessController.php" hash="8a4040e1d7b4f1a9aca6c84d9512a2d3"/></dir><dir name="etc"><file name="adminhtml.xml" hash="2d66eea2e9f7f200bc683dbea7c4f9fa"/><file name="config.xml" hash="c1af05156931fcd2041656126ffdf459"/><file name="jstranslator.xml" hash="2fc4852a02ac4062d9b55960d88c9b0a"/><file name="system.xml" hash="98c156653141b905a402280035189067"/><file name="wsv3.wsdl" hash="39583e5ba6eba378e2e8f853197d11bd"/></dir><dir name="sql"><dir name="qas_setup"><file name="mysql4-install-0.0.1.php" hash="2da70417671b254650dc644e957c9798"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="experian_qas.xml" hash="d05d6eb05105f49976ce55b4659887ed"/></dir><dir name="template"><dir name="qas"><dir name="checkout"><file name="billing.phtml" hash="71c823ef5d5e8abd89102f1675eb0263"/><file name="shipping.phtml" hash="0f3dd235764026a12e5c012297438c2c"/></dir><dir name="customer"><dir name="address"><file name="edit.phtml" hash="8d612e77586c1c390ed576d40c2cd93b"/></dir></dir><file name="email_validate.phtml" hash="44363aab68426694228a4c2d949c7e14"/><file name="interaction.phtml" hash="52e54db9abad7047d15fadd019351542"/><file name="intuitive.phtml" hash="6a74984e2c856abd1ebb8b636465621f"/><file name="popin.phtml" hash="3f7ede1b68430db2a06e97e03e904c7c"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Experian_Qas.xml" hash="96f1b312c3dc1fa7084edacfe85f9f5c"/></dir></target><target name="mageskin"><dir name="frontend"><dir name="base"><dir name="default"><dir name="qas"><dir name="css"><file name="styles.css" hash="93be3befc4db95aa7b5faaa982fbb4b3"/></dir><dir name="images"><file name="bkg_btn-close.gif" hash="df3f2332f0bad01e031deb22b81f630c"/><file name="bkg_btn-close2.gif" hash="822457d78fb3c21dc12e9777d83eb4f1"/></dir><dir name="js"><file name="intuitive.js" hash="cf727e77cb1dc2837826e838fa405a56"/><file name="searchengine.js" hash="da778e7e3a3b4737b92b09504a3d7c3c"/></dir></dir></dir></dir></dir></target><target name="magelocale"><dir name="fr_FR"><file name="Experian_Qas.csv" hash="0f622fb7bc057c84fd2d88746c066aa7"/></dir><dir name="en_US"><file name="Experian_Qas.csv" hash="4f8dd64729f48922a22c5ae0c404be68"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.3.3</min><max>6.0.0</max></php><extension><name>soap</name><min></min><max></max></extension></required></dependencies>
+</package>

@@ -1,0 +1,55 @@
+<?php $helper = Mage::helper('experian_qas'); ?>
+
+<?php if ($helper->isEmailValidateEnabled()): ?>
+
+<?php $emailValidateUrl     = Mage::getUrl('qas/process/validateEmail'); ?>
+<?php $acceptUnknownsEmails = $helper->isAcceptUnknowsEmails();?>
+<script type="text/javascript">
+//<![CDATA[
+    // Needed for Magento version wich do not support jstranslator.xml
+    Translator.add('unknown', '<?php echo $this->__('unknown'); ?>');
+    Translator.add('illegitimate', '<?php echo $this->__('illegitimate'); ?>');
+    Translator.add('disposable', '<?php echo $this->__('disposable'); ?>');
+    Translator.add('undeliverable', '<?php echo $this->__('undeliverable'); ?>');
+    Translator.add('unreachable', '<?php echo $this->__('unreachable'); ?>');
+
+    Validation.add('validate-email', '', function(v) {
+        var url = '<?php echo $emailValidateUrl ?>?email='+ encodeURIComponent(v);
+        var isEmailValid = false;
+        new Ajax.Request(url, {
+            method: 'get',
+            asynchronous: false,
+            onCreate: function() {
+                $$('.validate-email').each(function(email) {
+                    email.insert({after: '<img class="validate-email-loader" src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif')?>" />'});
+                });
+            },
+            onSuccess: function(transport) {
+                var obj = eval('(' + transport.responseText + ')');
+
+                if (typeof obj == 'object' && typeof obj.Certainty == 'string' &&
+                        (obj.Certainty == 'verified' <?php echo $acceptUnknownsEmails ? "|| obj.Certainty == 'unknown'" : ''?>)) {
+                    isEmailValid = true;
+                } else {
+                   Validation.get('validate-email').error = Translator.translate(obj.Certainty);
+                }
+                return isEmailValid;
+            },
+            onComplete: function() {
+                $$('.validate-email-loader').each(function(loader) {
+                    loader.remove();
+                });
+
+                $$('.validate-email').each(function(email) {
+                    if (typeof email.next('.validation-advice') != "undefined") {
+                        email.next('.validation-advice').remove();
+                    }
+                });
+            }
+        });
+
+        return isEmailValid;
+    });
+//]]>
+</script>
+<?php endif; ?>

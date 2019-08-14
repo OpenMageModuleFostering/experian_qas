@@ -1,0 +1,128 @@
+<?php $helper = Mage::helper('experian_qas'); ?>
+<?php if ($helper->isSearchEngineEnabled()): ?>
+<?php
+    //code popin factorization
+    echo $this->getLayout()->createBlock('core/template')->setTemplate('qas/popin.phtml')->setAlias('customer')->toHtml();
+
+    ?>
+<script type="text/javascript">
+    //<![CDATA[
+    var interactionWindow = $('interactionWindowCustomer');
+    var interactionWindowMask = $('interactionWindowCustomer-mask');
+    var interactionWindowContent = $('interactionWindowContentCustomer');
+    var keepBillingAddress = false;
+
+    function leaveCustomerAddress(){
+        interactionWindow.hide();
+        interactionWindowMask.hide();
+    }
+
+    function keepMyCustomerAddress(){
+        keepBillingAddress = true;
+        interactionWindow.hide();
+        interactionWindowMask.hide();
+        $('<?php echo $this->getFormName() ?>').submit();
+        keepBillingAddress = false;
+    }
+
+
+    function selectCustomerAddress() {
+        var customerForm = new VarienForm('<?php echo Experian_Qas_Block_Interaction::INTERACTION_FORM_NAME ?>Customer');
+        var validator    = new Validation(customerForm.form);
+
+        if (validator.validate()) {
+            new Ajax.Request(
+                '<?php echo Mage::getUrl('qas/process/normalizeAddress') ?>',
+                {
+                    method: 'post',
+                    parameters: Form.serialize($('<?php echo Experian_Qas_Block_Interaction::INTERACTION_FORM_NAME ?>Customer')),
+                    onComplete: function() {
+                    },
+                    onFailure: function(response){
+                        alert('An error occurred while processing your request');
+                        this.onComplete;
+                    },
+                    onSuccess: function(response){
+                        if (response && response.responseText){
+
+                            interactionWindow.hide();
+                            interactionWindowMask.hide();
+                            if (typeof(response.responseText) == 'string') {
+                                eval('result = ' + response.responseText);
+                            }
+                            //for region input
+                            <?php $inputType = 'text';?>
+
+                            if(!isNaN(result.region)) {
+                                <?php $inputType = 'select';?>
+                                var current_select = $('<?php echo $this->getRegion() ?>');
+                                var current_non = current_select.select('option[value="'+result.region+'"]');
+                                var options = current_select.select("option");
+                                if (current_non[0]) {
+                                     options.each(function(item)
+                                        {
+                                            if(item.value == current_non[0].value)
+                                            {
+                                            item.selected = true;
+                                            }
+                                        });
+                                    }
+
+                            }
+                            $('<?php echo $this->getStreet1() ?>').value = result.street_1;
+                            $('<?php echo $this->getStreet2() ?>').value = result.street_2;
+                            $('<?php echo $this->getCity() ?>').value = result.city;
+                            $('<?php echo $this->getRegionInput($inputType) ?>').value = result.region;
+                            $('<?php echo $this->getZip() ?>').value = result.zip;
+                            $('<?php echo $this->getFormName() ?>').submit();
+                        }
+                    }.bind(this)
+                }
+            )
+        }
+
+
+
+    }
+
+
+    Event.observe(window, 'load', function() {
+        Event.observe($('<?php echo $this->getFormName() ?>'),  'submit', function(event){
+            if (keepBillingAddress === false) {
+                new Ajax.Request(
+                        // the param id is used to identify the source of address edition
+                    '<?php echo Mage::getUrl('qas/process/addressSearchEngine/edit/1')?>',
+                    {
+                        method: 'post',
+                        asynchronous: false,
+                        parameters: Form.serialize($('<?php echo $this->getFormName() ?>')),
+                        onSuccess: function(transport){
+                            //added to overcome the visiblity problem of buttons.
+                            if (transport.responseText) {
+                                $$('.interactionWindow .display').each(function(item){
+                                    item.show();
+                                });
+                                interactionWindowContent.update(transport.responseText);
+                                interactionWindow.show();
+                                interactionWindowMask.show();
+                            }
+                        }.bind(this),
+                        onComplete: function(transport){
+                            if (!transport.responseText) {
+                                keepMyCustomerAddress();
+                            }
+                        }.bind(this),
+                        onFailure: function(){
+                            keepMyCustomerAddress();
+                        }.bind(this)
+                    }
+                );
+                Event.stop(event);
+            }
+
+        }.bind(this));
+    });
+    //]]>
+    </script>
+
+<?php endif; ?>

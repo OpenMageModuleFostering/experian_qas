@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<layout version="0.1.0">
+    
+       
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>qas/css/styles.css</stylesheet></action>
+        </reference>
+        <reference name="footer">
+            <block type="core/template" name="qas_email_validate" template="qas/email_validate.phtml"/>
+        </reference>
+    </default>
+    
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>qas/js/intuitive.js</name></action> 
+            <action method="addItem"><type>skin_js</type><name>qas/js/searchengine.js</name></action> 
+        </reference>
+        <reference name="before_body_end">
+            <block type="experian_qas/addressField_billing" name="qas_intuitive_billing" template="qas/intuitive.phtml" />
+            <block type="experian_qas/addressField_shipping" name="qas_intuitive_shipping" template="qas/intuitive.phtml" />
+            <block type="experian_qas/addressField_billing" name="checkout_onepage_qas_billing" template="qas/checkout/billing.phtml"/>
+            <block type="experian_qas/addressField_shipping" name="checkout_onepage_qas_shipping" template="qas/checkout/shipping.phtml"/>
+        </reference>
+    </checkout_onepage_index>
+     
+    <customer_address_form>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>qas/js/intuitive.js</name></action> 
+            <action method="addItem"><type>skin_js</type><name>qas/js/searchengine.js</name></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="experian_qas/addressField" name="qas_search_engine" template="qas/customer/address/edit.phtml"/>
+            <block type="experian_qas/addressField" name="qas_intuitive" template="qas/intuitive.phtml" />
+        </reference>
+    </customer_address_form>
+    
+</layout>

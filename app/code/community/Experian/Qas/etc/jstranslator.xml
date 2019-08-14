@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Experian
+ * @package   Experian_Qas
+ * @copyright Experian 2012
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<jstranslator>
+    <one-or-more-services-timed-out translate="message" module="experian_qas">
+        <message>One or more services timed out</message>
+    </one-or-more-services-timed-out>
+    <one-or-more-services-failed translate="message" module="experian_qas">
+        <message>One or more services failed</message>
+    </one-or-more-services-failed>
+    <success translate="message" module="experian_qas">
+        <message>Success</message>
+    </success>
+    <invalid-request translate="message" module="experian_qas">
+        <message>Invalid request</message>
+    </invalid-request>
+    <invalid-parameter translate="message" module="experian_qas">
+        <message>Invalid parameter</message>
+    </invalid-parameter>
+    <not-authorized-for-one-or-more-services translate="message" module="experian_qas">
+        <message>Not authorized for one or more services</message>
+    </not-authorized-for-one-or-more-services>
+    <service-unavailable translate="message" module="experian_qas">
+        <message>Service unavailable</message>
+    </service-unavailable>
+    <email-codes-code-description translate="message" module="experian_qas">
+        <message>Email codes Code Description</message>
+    </email-codes-code-description>
+    <timeout translate="message" module="experian_qas">
+        <message>Timeout</message>
+    </timeout>
+    <syntax-ok translate="message" module="experian_qas">
+        <message>Syntax OK</message>
+    </syntax-ok>
+    <syntax-ok-and-domain-valid-according-to-the-domain-database translate="message" module="experian_qas">
+        <message>Syntax OK and domain valid according to the domain database</message>
+    </syntax-ok-and-domain-valid-according-to-the-domain-database>
+    <syntax-ok-and-domain-exists translate="message" module="experian_qas">
+        <message>Syntax OK and domain exists</message>
+    </syntax-ok-and-domain-exists>
+    <syntax-ok-domain-exists-and-domain-can-receive-email translate="message" module="experian_qas">
+        <message>Syntax OK, domain exists, and domain can receive email</message>
+    </syntax-ok-domain-exists-and-domain-can-receive-email>
+    <syntax-ok-domain-exists-and-mailbox-does-not-reject-mail translate="message" module="experian_qas">
+        <message>Syntax OK, domain exists, and mailbox does not reject mail</message>
+    </syntax-ok-domain-exists-and-mailbox-does-not-reject-mail>
+    <general-syntax-error translate="message" module="experian_qas">
+        <message>General syntax error</message>
+    </general-syntax-error>
+    <invalid-character-in-address translate="message" module="experian_qas">
+        <message>Invalid character in address</message>
+    </invalid-character-in-address>
+    <invalid-domain-syntax translate="message" module="experian_qas">
+        <message>Invalid domain syntax</message>
+    </invalid-domain-syntax>
+    <invalid-username-syntax translate="message" module="experian_qas">
+        <message>Invalid username syntax</message>
+    </invalid-username-syntax>
+    <invalid-username-syntax-for-that-domain translate="message" module="experian_qas">
+        <message>Invalid username syntax for that domain</message>
+    </invalid-username-syntax-for-that-domain>
+    <address-is-too-long translate="message" module="experian_qas">
+        <message>Address is too long</message>
+    </address-is-too-long>
+    <address-has-unbalanced-parentheses-brackets-or-quotes translate="message" module="experian_qas">
+        <message>Address has unbalanced parentheses, brackets, or quotes</message>
+    </address-has-unbalanced-parentheses-brackets-or-quotes>
+    <address-does-not-have-a-username translate="message" module="experian_qas">
+        <message>Address does not have a username</message>
+    </address-does-not-have-a-username>
+    <address-does-not-have-a-domain translate="message" module="experian_qas">
+        <message>Address does not have a domain</message>
+    </address-does-not-have-a-domain>
+    <address-does-not-have-an-sign translate="message" module="experian_qas">
+        <message>Address does not have an @ sign</message>
+    </address-does-not-have-an-sign>
+    <address-has-more-than-one-sign translate="message" module="experian_qas">
+        <message>Address has more than one @ sign</message>
+    </address-has-more-than-one-sign>
+    <invalid-top-level-domain-tld-in-address translate="message" module="experian_qas">
+        <message>Invalid top-level-domain (TLD) in address</message>
+    </invalid-top-level-domain-tld-in-address>
+    <unquoted-spaces-are-not-allowed-in-email-addresses translate="message" module="experian_qas">
+        <message>Unquoted spaces are not allowed in email addresses</message>
+    </unquoted-spaces-are-not-allowed-in-email-addresses>
+    <domain-does-not-exist translate="message" module="experian_qas">
+        <message>Domain does not exist</message>
+    </domain-does-not-exist>
+    <domain-does-not-have-a-valid-ip-address translate="message" module="experian_qas">
+        <message>Domain does not have a valid IP address</message>
+    </domain-does-not-have-a-valid-ip-address>
+    <domain-cannot-receive-email translate="message" module="experian_qas">
+        <message>Domain cannot receive email</message>
+    </domain-cannot-receive-email>
+    <the-mailbox-is-invalid-or-the-username-does-not-exist-at-the-domain translate="message" module="experian_qas">
+        <message>The mailbox is invalid or the username does not exist at the domain</message>
+    </the-mailbox-is-invalid-or-the-username-does-not-exist-at-the-domain>
+    <mailbox-is-full-and-can-not-receive-email-at-this-time translate="message" module="experian_qas">
+        <message>Mailbox is full and can not receive email at this time</message>
+    </mailbox-is-full-and-can-not-receive-email-at-this-time>
+    <mail-is-not-accepted-for-this-domain translate="message" module="experian_qas">
+        <message>Mail is not accepted for this domain</message>
+    </mail-is-not-accepted-for-this-domain>
+    <addresses-with-that-username-are-not-allowed translate="message" module="experian_qas">
+        <message>Addresses with that username are not allowed</message>
+    </addresses-with-that-username-are-not-allowed>
+    <addresses-with-that-domain-are-not-allowed translate="message" module="experian_qas">
+        <message>Addresses with that domain are not allowed</message>
+    </addresses-with-that-domain-are-not-allowed>
+    <the-email-address-is-suppressed-and-not-allowed translate="message" module="experian_qas">
+        <message>The email address is suppressed and not allowed</message>
+    </the-email-address-is-suppressed-and-not-allowed>
+    <internal-error translate="message" module="experian_qas">
+        <message>Internal error</message>
+    </internal-error>
+    <unreachable translate="message" module="experian_qas">
+        <message>unreachable</message>
+    </unreachable>
+    <unknown translate="message" module="experian_qas">
+        <message>unknown</message>
+    </unknown>
+    <illegitimate translate="message" module="experian_qas">
+        <message>illegitimate</message>
+    </illegitimate>
+    <disposable translate="message" module="experian_qas">
+        <message>disposable</message>
+    </disposable>
+    <undeliverable translate="message" module="experian_qas">
+        <message>undeliverable</message>
+    </undeliverable>
+</jstranslator>

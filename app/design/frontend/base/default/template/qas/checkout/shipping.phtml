@@ -1,0 +1,122 @@
+<?php $helper = Mage::helper('experian_qas'); ?>
+<?php if ($helper->isSearchEngineEnabled()): ?>
+<?php
+    //code popin factorization
+    echo $this->getLayout()->createBlock('core/template')->setTemplate('qas/popin.phtml')->setAlias('shipping')->toHtml();
+
+    ?>
+<script type="text/javascript">
+    //<![CDATA[
+    var interactionWindowShipping = $('interactionWindowShipping');
+    var interactionWindowShippingMask = $('interactionWindowShipping-mask');
+    var interactionWindowContentShipping = $('interactionWindowContentShipping');
+    var keepShippingAddress = false;
+
+    function leaveShippingAddress(){
+        interactionWindowShipping.hide();
+        interactionWindowShippingMask.hide();
+    }
+
+    function keepMyShippingAddress(){
+        keepShippingAddress = true;
+        interactionWindowShipping.hide();
+        interactionWindowShippingMask.hide();
+        shipping.save();
+        keepShippingAddress = false;
+    }
+
+    function selectShippingAddress() {
+        var shippingForm = new VarienForm('<?php echo Experian_Qas_Block_Interaction::INTERACTION_FORM_NAME ?>Shipping');
+        var validator    = new Validation(shippingForm.form);
+
+        if (validator.validate()) {
+            new Ajax.Request(
+                '<?php echo Mage::getUrl('qas/process/normalizeAddress') ?>',
+                {
+                    method: 'post',
+                    parameters: Form.serialize($('<?php echo Experian_Qas_Block_Interaction::INTERACTION_FORM_NAME . 'Shipping' ?>')),
+                    onComplete: function() {
+                        saveAddress(shipping, 'shipping');
+                    },
+                    onFailure: function(response){
+                        alert('An error occurred while processing your request');
+                        this.onComplete;
+                    },
+                    onSuccess: function(response){
+                        if (response && response.responseText){
+                            interactionWindowShipping.hide();
+                            interactionWindowShippingMask.hide();
+                            if (typeof(response.responseText) == 'string') {
+                                eval('result = ' + response.responseText);
+                            }
+                            //for region input
+                            <?php $inputType = 'text';?>
+
+                            if(!isNaN(result.region)) {
+                                <?php $inputType = 'select';?>
+                                var current_select = $('<?php echo $this->getRegion() ?>');
+                                var current_non = current_select.select('option[value="'+result.region+'"]');
+                                var options = current_select.select("option");
+                                if (current_non[0]) {
+                                     options.each(function(item)
+                                        {
+                                            if(item.value == current_non[0].value)
+                                            {
+                                            item.selected = true;
+                                            }
+                                        });
+                                    }
+                            }
+                            $('<?php echo $this->getStreet1() ?>').value = result.street_1;
+                            $('<?php echo $this->getStreet2() ?>').value = result.street_2;
+                            $('<?php echo $this->getCity() ?>').value = result.city;
+                            $('<?php echo $this->getRegionInput($inputType) ?>').value = result.region;
+                            $('<?php echo $this->getZip() ?>').value = result.zip;
+                        }
+                    }.bind(this)
+                }
+            )
+        }
+    }
+
+
+
+    Event.observe(window, 'load', function() {
+        Object.extend(Shipping.prototype, {
+            save: function(){
+                if ($('shipping-new-address-form').visible() && keepShippingAddress === false) {
+                    new Ajax.Request(
+                        '<?php echo Mage::getUrl('qas/process/addressSearchEngine/edit/2')?>',
+                        {
+                            method: 'post',
+                            parameters: Form.serialize(this.form),
+                            onSuccess: function(transport){
+                                if (transport.responseText) {
+                                    $$('.interactionWindow .display').each(function(item){
+                                        item.show();
+                                    });
+                                    interactionWindowContentShipping.update(transport.responseText);
+                                    interactionWindowShipping.show();
+                                    interactionWindowShippingMask.show();
+                                }
+                            }.bind(this),
+                            onComplete: function(transport){
+                                if (!transport.responseText) {
+                                    saveAddress(this, 'shipping');
+                                }
+                            }.bind(this),
+                            onFailure: function(){
+                                saveAddress(this, 'shipping');
+                            }.bind(this)
+                        }
+                    );
+                } else {
+                    saveAddress(this, 'shipping');
+                }
+            }
+        });
+    });
+    //]]>
+    </script>
+
+<?php endif; ?>

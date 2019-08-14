@@ -1,0 +1,14 @@
+<?php $picklist = $this->getSuggestData(); ?>
+<?php if ($picklist) : ?>
+    <div>
+        <?php echo $this->__('Please choose one of the following addresses and click on <strong>Select</strong>.<br/>If there is no matching and you are sure that you entered a valid address, click on <strong>Keep my address</strong>.') ?>
+    </div>
+    <div style="max-height: 350px; overflow: auto; margin: 15px 0px;">
+        <?php foreach ($picklist as $address): ?>
+        <div>
+            <input id="<?php echo $address['value'] ?>" class="validate-one-required-by-name" name="<?php echo Experian_Qas_Helper_Data::QUERY_MONIKER ?>" type="radio" value="<?php echo $address['value'] ?>">
+            <label for="<?php echo $address['value'] ?>"><?php echo $address['title'] ?></label>
+        </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

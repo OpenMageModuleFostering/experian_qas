@@ -1,0 +1,124 @@
+<?php $helper = Mage::helper('experian_qas'); ?>
+<?php if ($helper->isSearchEngineEnabled()): ?>
+<?php
+    //code popin factorization
+    echo $this->getLayout()->createBlock('core/template')->setTemplate('qas/popin.phtml')->setAlias('billing')->toHtml();
+
+    ?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var interactionWindowBilling = $('interactionWindowBilling');
+    var interactionWindowBillingMask = $('interactionWindowBilling-mask');
+    var interactionWindowBillingContent = $('interactionWindowContentBilling');
+    var keepBillingAddress = false;
+
+
+    function leaveBillingAddress(){
+        interactionWindowBilling.hide();
+        interactionWindowBillingMask.hide();
+    }
+
+    function keepMyBillingAddress(){
+        keepBillingAddress = true;
+        interactionWindowBilling.hide();
+        interactionWindowBillingMask.hide();
+        billing.save();
+        keepBillingAddress = false;
+    }
+
+    function selectBillingAddress() {
+        var billingForm = new VarienForm('<?php echo Experian_Qas_Block_Interaction::INTERACTION_FORM_NAME ?>Billing');
+        var validator    = new Validation(billingForm.form);
+
+        if (validator.validate()) {
+            new Ajax.Request(
+                '<?php echo Mage::getUrl('qas/process/normalizeAddress') ?>',
+                {
+                    method: 'post',
+                    parameters: Form.serialize($('<?php echo Experian_Qas_Block_Interaction::INTERACTION_FORM_NAME ?>Billing')),
+                    onComplete: function() {
+                        saveAddress(billing, 'billing');
+                    },
+                    onFailure: function(response){
+                        alert('An error occurred while processing your request');
+                        this.onComplete;
+                    },
+                    onSuccess: function(response){
+                        if (response && response.responseText){
+                            interactionWindowBilling.hide();
+                            interactionWindowBillingMask.hide();
+                            if (typeof(response.responseText) == 'string') {
+                                eval('result = ' + response.responseText);
+                            }
+                            //for region input
+                            <?php $inputType = 'text';?>
+
+                            if(!isNaN(result.region)) {
+                                <?php $inputType = 'select';?>
+                                var current_select = $('<?php echo $this->getRegion() ?>');
+                                var current_non = current_select.select('option[value="'+result.region+'"]');
+                                var options = current_select.select("option");
+                                if (current_non[0]) {
+                                     options.each(function(item)
+                                        {
+                                            if(item.value == current_non[0].value)
+                                            {
+                                            item.selected = true;
+                                            }
+                                        });
+                                    }
+
+                            }
+                            $('<?php echo $this->getStreet1() ?>').value = result.street_1;
+                            $('<?php echo $this->getStreet2() ?>').value = result.street_2;
+                            $('<?php echo $this->getCity() ?>').value = result.city;
+                            $('<?php echo $this->getRegionInput($inputType) ?>').value = result.region;
+                            $('<?php echo $this->getZip() ?>').value = result.zip;
+                        }
+                    }.bind(this)
+                }
+            )
+        }
+    }
+
+
+    Event.observe(window, 'load', function() {
+        Object.extend(Billing.prototype, {
+            save: function(){
+                if ($('billing-new-address-form').visible() && keepBillingAddress === false) {
+                    new Ajax.Request(
+                        '<?php echo Mage::getUrl('qas/process/addressSearchEngine/edit/3')?>',
+                        {
+                            method: 'post',
+                            parameters: Form.serialize(this.form),
+                            onSuccess: function(transport){
+                                if (transport.responseText) {
+                                    $$('.interactionWindow .display').each(function(item){
+                                        item.show();
+                                    });
+                                    interactionWindowBillingContent.update(transport.responseText);
+                                    interactionWindowBilling.show();
+                                    interactionWindowBillingMask.show();
+                                }
+                            }.bind(this),
+                            onComplete: function(transport){
+                                if (!transport.responseText) {
+                                    saveAddress(this, 'billing');
+                                }
+                            }.bind(this),
+                            onFailure: function(){
+                                saveAddress(this, 'billing');
+                            }.bind(this)
+                        }
+                    );
+                } else {
+                    saveAddress(this, 'billing');
+                }
+            }
+        });
+    });
+    //]]>
+    </script>
+
+<?php endif; ?>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Experian
+ * @package   Experian_Qas
+ * @copyright Experian 2012
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Experian_Qas>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Experian_Qas>
+    </modules>
+</config>

@@ -1,0 +1,38 @@
+<?php 
+$suffix = null;
+$myMethod = array ( $this, 'getAlias' );
+if(is_callable($myMethod,true)) {
+    $suffix = ucfirst($this->getAlias());
+}
+?>
+<div id="interactionWindow<?php echo $suffix ?>-mask" class="interactionWindow-mask" style="display: none;"></div>
+<div id="interactionWindow<?php echo $suffix ?>" class="interactionWindow"
+    style="display: none;">
+    <div class="message-popup-head">
+    <a title="<?php echo $this->__('Close') ?>" onclick="leave<?php echo $suffix ?>Address(); return false;" href="#">
+    <span><?php echo $this->__('Close') ?></span>
+    </a>
+    <h2><?php echo $this->__('Address confirmation') ?></h2>
+    </div>
+    <div class="message-popup-content">
+    <form
+        id="<?php echo Experian_Qas_Helper_Data::INTERACTION_FORM_NAME.$suffix?>"
+        action="<?php echo Mage::getUrl('qas/process/normalizeAddress')?>">
+        <div id="interactionWindowContent<?php echo $suffix ?>"></div>
+        <div>
+            <button type="button"
+                title="<?php echo $this->__('Select') ?>"
+                class="button display" onclick="select<?php echo $suffix ?>Address()">
+                <span><span><?php echo $this->__('Select') ?> </span> </span>
+            </button>
+            <button type="button"
+                title="<?php echo $this->__('Keep my address') ?>"
+                class="button" onclick="keepMy<?php echo $suffix ?>Address()">
+                <span><span><?php echo $this->__('Keep my address') ?> </span>
+                </span>
+            </button>
+
+        </div>
+    </form>
+    </div>
+</div>
