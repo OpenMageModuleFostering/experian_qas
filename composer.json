@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/Experian_Qas",
+    "name": "openmage-module-fostering\/experian_qas",
     "type": "magento-module",
-    "license": "OSL-v3.0",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "QAS for Magento Community & Enterprise",
     "authors": [
